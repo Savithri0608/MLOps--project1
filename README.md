@@ -2,13 +2,13 @@
 
 this repository demonstrates a tiny reproducible MLOps flow:
 
-Train a small model (train.py) — writes artifacts/model.pkl and artifacts/metrics.json
-Run predictions from the command line with run_model.py --input "[5.1,3.5,1.4,0.2]"
-Start a minimal Flask app with python src/app.py that serves /predict
-Build a Docker image with docker build -t hello-mlops .
-CI trains the model and uploads artifacts
-Quick start (local)
-Create and activate a venv (example using python 3.13 or 3.11): python -m venv .venv source .venv/bin/activate
+1.Train a small model (train.py) — writes artifacts/model.pkl and artifacts/metrics.json
+2.Run predictions from the command line with run_model.py --input "[5.1,3.5,1.4,0.2]"
+3.Start a minimal Flask app with python src/app.py that serves /predict
+4.Build a Docker image with docker build -t hello-mlops .
+5.CI trains the model and uploads artifacts
+6.Quick start (local)
+7.Create and activate a venv (example using python 3.13 or 3.11): python -m venv .venv source .venv/bin/activate
 
 Install dependencies: pip install --upgrade pip setuptools wheel pip install -r requirements.txt
 
