@@ -1,0 +1,50 @@
+#new version of the model should be uploaded as an atifact someone in the org can download
+
+name: CI - Train and save the model
+
+
+#define the action
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  matrix-pip:
+    name: Train and save the model
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.11, 3.12]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4   #instesd of writing shell script to pull cod efrom repo us ethis action
+      
+      - name: Setup python
+        uses: actions/setup-python@v4
+        #to define which version of the python
+        with:
+          python-version: ${{ matrix.python }} 
+
+      - name: Upgrade-pip
+        run: python -m pip install --upgrade pip setuptools wheel
+           
+#install project reurements
+      - name: install project dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Train the model
+        run:
+          python train.py
+          ls -la artifacts
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ml-artifacts-${{ matrix.python }} -${{ github.run_id }}
+          path: artifacts
+
+       
+  
